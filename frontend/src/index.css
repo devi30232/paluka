@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{box-sizing:border-box}body{margin:0;background:#fbf9fc;color:#2b1b26;font-family:'Manrope','Noto Sans Telugu',sans-serif;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
+:lang(te),h1,h2,h3{font-feature-settings:"kern" 1}

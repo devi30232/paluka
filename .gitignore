@@ -85,3 +85,9 @@ android-sdk/
 **/.emergent/recordings/
 # metadata
 .emergent/
+
+# Environment files
+.env
+.env.*
+**/.env
+**/.env.*
