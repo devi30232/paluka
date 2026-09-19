@@ -1,0 +1,68 @@
+{
+  "app_name": "VaaniStock AI",
+  "tagline": "Speak. Stock. Simplified.",
+  "target_audience": "Kirana store owners, local retailers, and small shop keepers across India",
+  "design_context": "hybrid_fullstack_voice_assistant",
+  "emotional_tone": "warm, friendly, modern, trustworthy, and accessible",
+  "typography": {
+    "heading_font": "Outfit, sans-serif",
+    "body_font": "Plus Jakarta Sans, sans-serif",
+    "mono_font": "JetBrains Mono, monospace"
+  },
+  "colors": {
+    "primary": "#7A3563",
+    "primary_hover": "#62294F",
+    "plum_deep": "#4A1E3B",
+    "lavender_soft": "#F5E6EF",
+    "lavender_border": "#E2C4D8",
+    "coral_accent": "#FF6B5B",
+    "coral_hover": "#E55648",
+    "bg_light": "#FCF9FB",
+    "surface_white": "#FFFFFF",
+    "text_dark": "#2B1B26",
+    "text_muted": "#756270",
+    "success": "#10B981",
+    "warning": "#F59E0B",
+    "danger": "#EF4444"
+  },
+  "grids": {
+    "bento_mode": "tetris_asymmetric",
+    "dashboard_mode": "high_density"
+  },
+  "motion": {
+    "spring_transition": "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+    "hover_lift": "hover:-translate-y-1 transition-transform duration-200"
+  },
+  "accessibility": {
+    "min_contrast_ratio": "4.5:1",
+    "interactive_elements_testid": true,
+    "reduced_motion_supported": true
+  },
+  "image_urls": [
+    {
+      "category": "storefront",
+      "url": "https://images.unsplash.com/photo-1739066598279-1297113f5c6a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwxfHxraXJhbmElMjBzdG9yZSUyMGluZGlhbiUyMGdyb2NlcnklMjBzaG9wJTIwcmV0YWlsfGVufDB8fHx8MTc4OTgwMDk5NHww&ixlib=rb-4.1.0&q=85",
+      "description": "Kirana storefront with goods"
+    },
+    {
+      "category": "products_spices",
+      "url": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjBzcGljZXMlMjBncmFpbnMlMjBncm9jZXJ5JTIwaXRlbXMlMjBjb2xvcmZ1bCUyMHByb2R1Y3QlMjBwYWNrYWdpbmd8ZW58MHx8fHwxNzg5ODAwOTk0fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Indian spices and grocery items"
+    }
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, on distribution outputs. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "You MUST NOT apply universal transition. Eg: transition: all. Always add transitions for specific interactive elements.",
+    "You MUST NOT center align the app container (.App { text-align: center; }).",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to app style.",
+    "NEVER use AI assistant Emoji characters like 🤖🧠💭💡🔮 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, entrance animations.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "All interactive and key informational elements MUST include a data-testid attribute.",
+    "CREATE THE FILE IN THE PATH /app/design_guidelines.json."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "summary": "Completed public-preview backend and frontend regression testing for Demo Shop, dashboard, voice commands, inventory, settings, profile routes, help, and responsive navigation.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "/api/auth/login, /api/auth/logout",
+        "issue": "Login returns a JSON bearer token but no application httpOnly access cookie is set, and logout only returns {ok:true} without revoking the still-valid token. This does not meet the auth playbook's cookie/session expectations.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": [
+      {
+        "endpoint": "/api/products/{pid}",
+        "issue": "PUT for a nonexistent product returns HTTP 200 with null instead of 404. DELETE also returns success when nothing was deleted."
+      },
+      {
+        "endpoint": "/api/products",
+        "issue": "ProductIn defaults minimum_stock to 5 regardless of the shop's saved default_low_stock_threshold setting."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Alerts tabs",
+        "issue": "Low stock, Out of stock, and Reorder suggestions buttons are rendered but do not change the displayed list/filter.",
+        "selector": "[data-testid='alerts-out-tab'], [data-testid='alerts-reorder-tab']",
+        "priority": "MEDIUM"
+      },
+      {
+        "component": "Voice success card",
+        "issue": "Success copy always says stock was added, including after a STOCK_OUT/sold command.",
+        "selector": "[data-testid='voice-success']",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "New product defaults after Settings threshold save",
+        "issue": "The threshold persists visually and after refresh, but add-product form/backend still hardcode minimum stock 5 instead of using the saved threshold.",
+        "affected_selectors": ["[data-testid='settings-threshold']", "[data-testid='product-minimum-input']"]
+      }
+    ],
+    "design_issues": [
+      {
+        "screen": "Mobile open sidebar",
+        "issues": ["Sidebar opens over the page without a visible scrim or close control; the underlying inventory content appears visually clipped while the drawer is open."]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_vaanistock_regression.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Implement the intended session strategy: secure httpOnly cookie or explicitly document bearer-only auth, and revoke/clear sessions on logout.",
+    "Use the persisted shop default_low_stock_threshold when initializing and validating newly added products.",
+    "Wire Alerts tabs to actual low/out-of-stock/reorder filters.",
+    "Make voice success text conditional on STOCK_IN versus STOCK_OUT.",
+    "Return 404 for product update/delete when the product does not exist."
+  ],
+  "critical_code_review_comments": [
+    "CORS is configured as allow_origins=['*'] with allow_credentials=False; this is incompatible with a cookie-based auth strategy and should be replaced with explicit configured origins if cookies are enabled.",
+    "The frontend has no catch/error state around profile, shop, settings, reset, or delete mutations, so failed API calls can leave users without actionable feedback."
+  ],
+  "updated_files": ["/app/backend/tests/test_vaanistock_regression.py", "/app/test_reports/iteration_1.json"],
+  "success_rate": {"backend": "100% (3/3 regression tests)", "frontend": "90% (primary flows pass; gaps listed above)"},
+  "seed_data_creation": "Demo Shop was used. Regression tests created and removed one TEST_ product; browser checks created a temporary Test Turmeric product and changed demo shop/settings data, so use Reset demo data before another clean demo run.",
+  "retest_needed": true,
+  "should_call_test_agent_after_fix": true,
+  "context_for_next_testing_agent": "Demo login, dashboard seed/stats, parser (Rice, Oil rendu, stock-out), confirmation-before-mutation, persistence, overdraw rejection, manual product/search, profile routes, help, settings refresh, and mobile nav were exercised. Re-test auth session behavior, alert tabs, threshold application, and stock-out success copy after fixes.",
+  "rca of the issue": "The threshold mismatch is caused by ProductIn.default=5 and the Inventory form's initial minimum_stock=5 being independent of the shop settings document. Alert tab controls have no state or filtering handlers in Alerts. Auth is bearer-token-only: login serializes token JSON, logout does not invalidate it, and CORS is wildcard/non-credentialed."
+}
